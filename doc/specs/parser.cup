@@ -113,11 +113,21 @@ terminal Token VECTOR_ACCESS;
 non terminal  			program;
 non terminal Axiom		axiom;
 
+non terminal            declaraciones;
+non terminal            declaracionConstantes;
+non terminal            expresionesConstante;
+non terminal            expresionConstante;
+
+non terminal            declaracionVariables;
+non terminal            expresionesVariable;
+non terminal            expresionVariable;
+
 non terminal            sentencias;
 non terminal            sentencia;
 non terminal            sentenciaEscribir;
 non terminal            sentenciaAsignacion;
 
+non terminal            tipos;
 non terminal            parametro;
 non terminal			expresion;
 non terminal			operador;
@@ -156,7 +166,21 @@ program ::=
    :};
 
 
-axiom ::= PROGRAM ID COLON BEGIN sentencias END DOT;
+axiom ::= PROGRAM ID COLON declaraciones BEGIN sentencias END DOT;
+
+declaraciones ::= declaracionConstantes declaracionVariables;
+
+declaracionConstantes ::= CONSTANTS expresionesConstante | ;
+expresionesConstante::= expresionConstante expresionesConstante | expresionConstante;
+expresionConstante::= ID ASSIGN NUMBER SEMICOLON;
+
+declaracionVariables ::= VARIABLES expresionesVariable | ;
+expresionesVariable::= expresionVariable expresionesVariable | expresionVariable;
+expresionVariable ::= ID COLON tipos SEMICOLON;
+
+tipos ::= INTEGER | BOOLEAN;
+
+// SENTENCIAS BODY
 
 sentencias ::= sentencia SEMICOLON sentencias 
 				| ;
