@@ -121,6 +121,7 @@ non terminal            expresionConstante;
 non terminal            declaracionVariables;
 non terminal            expresionesVariable;
 non terminal            expresionVariable;
+non terminal            listaExpresionVariable;
 
 non terminal            declaracionTipos;
 non terminal            expresionesTipo;
@@ -128,11 +129,19 @@ non terminal            expresionTipo;
 
 
 non terminal            declaracionSubprogramas;
+non terminal            declaracionesSubprograma;
+non terminal            declaracionSubprograma;
+non terminal            declaracionFuncion;
+non terminal            listaParametrosFuncion;
+non terminal            parametrosFuncion;
+non terminal            listaParametros;
 
 non terminal            sentencias;
 non terminal            sentencia;
 non terminal            sentenciaEscribir;
 non terminal            sentenciaAsignacion;
+non terminal            sentenciaReturn;
+non terminal			llamadaFuncion;
 non terminal            referencia;
 
 non terminal            tipos;
@@ -179,22 +188,50 @@ axiom ::= PROGRAM ID COLON declaraciones BEGIN sentencias END DOT;
 
 declaraciones ::= declaracionConstantes declaracionTipos declaracionVariables declaracionSubprogramas;
 
-declaracionConstantes ::= CONSTANTS expresionesConstante | ;
-expresionesConstante::= expresionConstante expresionesConstante | expresionConstante;
+// declaraciones de constantes
+declaracionConstantes ::= CONSTANTS expresionesConstante 
+				| ;
+expresionesConstante::= expresionConstante expresionesConstante 
+				| expresionConstante;
 expresionConstante::= ID ASSIGN NUMBER SEMICOLON;
 
-declaracionVariables ::= VARIABLES expresionesVariable | ;
-expresionesVariable::= expresionVariable expresionesVariable | expresionVariable;
-expresionVariable ::= ID COLON tipos SEMICOLON;
+// declaraciones de variables
+declaracionVariables ::= VARIABLES expresionesVariable 
+				| ;
+expresionesVariable::= expresionVariable expresionesVariable 
+				| expresionVariable;
+expresionVariable ::= listaExpresionVariable COLON tipos SEMICOLON;
+listaExpresionVariable ::= ID COMMA listaExpresionVariable | ID;
 
-declaracionTipos ::= TYPES expresionesTipo | ;
-expresionesTipo::= expresionesTipo expresionTipo | expresionTipo;
+// declaraciones de tipos
+declaracionTipos ::= TYPES expresionesTipo 
+				| ;
+expresionesTipo::= expresionesTipo expresionTipo 
+				| expresionTipo;
 expresionTipo::= ID ASSIGN VECTOR LEFT_BRACKET NUMBER RANGE NUMBER RIGHT_BRACKET OF tiposPrimitivos SEMICOLON;
 
-declaracionSubprogramas ::= SUBPROGRAM | ;
+tipos ::= tiposPrimitivos 
+				| ID;
+tiposPrimitivos ::= INTEGER 
+				| BOOLEAN;
 
-tipos ::= tiposPrimitivos | ID;
-tiposPrimitivos ::= INTEGER | BOOLEAN;
+// SUBPROGRAMAS
+declaracionSubprogramas ::= SUBPROGRAM declaracionesSubprograma 
+				| ;
+declaracionesSubprograma   ::= declaracionSubprograma 
+				| declaracionesSubprograma declaracionSubprograma;
+
+declaracionSubprograma ::= declaracionFuncion;
+                            
+declaracionFuncion ::= FUNCTION ID LEFT_PARENTHESIS listaParametrosFuncion RIGHT_PARENTHESIS COLON tiposPrimitivos COLON declaraciones BEGIN sentencias sentenciaReturn END SEMICOLON;
+
+listaParametrosFuncion ::= parametrosFuncion listaParametrosFuncion | parametrosFuncion;
+parametrosFuncion ::= listaParametros COLON tiposPrimitivos;
+
+listaParametros ::= ID COMMA listaParametros | ID;
+
+sentenciaReturn ::= RETURN ID SEMICOLON;
+
 
 // SENTENCIAS BODY
 
@@ -218,7 +255,10 @@ expresion::= referencia
 				| TRUE 
 				| FALSE 
 				| expresion operador expresion 
-				| LEFT_PARENTHESIS expresion RIGHT_PARENTHESIS;
+				| LEFT_PARENTHESIS expresion RIGHT_PARENTHESIS
+				| llamadaFuncion;
+				
+llamadaFuncion ::= ID LEFT_PARENTHESIS listaParametros RIGHT_PARENTHESIS;
 
 operador::= PLUS 
 				| ASTERISK 
