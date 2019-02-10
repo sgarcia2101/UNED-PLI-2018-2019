@@ -112,7 +112,12 @@ terminal Token VECTOR_ACCESS;
 
 non terminal  			program;
 non terminal Axiom		axiom;
-// ...
+
+non terminal            sentencias;
+non terminal            sentencia;
+non terminal            sentenciaEscribir;
+non terminal            parametro;
+non terminal			expresion;
 
 
 // Declaración de relaciones de precedencia
@@ -144,4 +149,17 @@ program ::=
    :};
 
 
-axiom ::= ;
+axiom ::= PROGRAM ID COLON BEGIN sentencias END DOT;
+
+sentencias ::= sentencia SEMICOLON sentencias 
+				| ;
+sentencia ::= sentenciaEscribir;
+sentenciaEscribir ::= WRITE LEFT_PARENTHESIS parametro RIGHT_PARENTHESIS;
+
+parametro ::= STRING 
+				| expresion 
+				| ;
+
+expresion ::= expresion PLUS expresion 
+				| LEFT_PARENTHESIS expresion RIGHT_PARENTHESIS
+				| NUMBER;
