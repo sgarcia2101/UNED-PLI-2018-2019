@@ -122,12 +122,21 @@ non terminal            declaracionVariables;
 non terminal            expresionesVariable;
 non terminal            expresionVariable;
 
+non terminal            declaracionTipos;
+non terminal            expresionesTipo;
+non terminal            expresionTipo;
+
+
+non terminal            declaracionSubprogramas;
+
 non terminal            sentencias;
 non terminal            sentencia;
 non terminal            sentenciaEscribir;
 non terminal            sentenciaAsignacion;
+non terminal            referencia;
 
 non terminal            tipos;
+non terminal            tiposPrimitivos;
 non terminal            parametro;
 non terminal			expresion;
 non terminal			operador;
@@ -168,7 +177,7 @@ program ::=
 
 axiom ::= PROGRAM ID COLON declaraciones BEGIN sentencias END DOT;
 
-declaraciones ::= declaracionConstantes declaracionVariables;
+declaraciones ::= declaracionConstantes declaracionTipos declaracionVariables declaracionSubprogramas;
 
 declaracionConstantes ::= CONSTANTS expresionesConstante | ;
 expresionesConstante::= expresionConstante expresionesConstante | expresionConstante;
@@ -178,7 +187,14 @@ declaracionVariables ::= VARIABLES expresionesVariable | ;
 expresionesVariable::= expresionVariable expresionesVariable | expresionVariable;
 expresionVariable ::= ID COLON tipos SEMICOLON;
 
-tipos ::= INTEGER | BOOLEAN;
+declaracionTipos ::= TYPES expresionesTipo | ;
+expresionesTipo::= expresionesTipo expresionTipo | expresionTipo;
+expresionTipo::= ID ASSIGN VECTOR LEFT_BRACKET NUMBER RANGE NUMBER RIGHT_BRACKET OF tiposPrimitivos SEMICOLON;
+
+declaracionSubprogramas ::= SUBPROGRAM | ;
+
+tipos ::= tiposPrimitivos | ID;
+tiposPrimitivos ::= INTEGER | BOOLEAN;
 
 // SENTENCIAS BODY
 
@@ -189,13 +205,15 @@ sentencia ::= sentenciaEscribir
 
 sentenciaEscribir ::= WRITE LEFT_PARENTHESIS parametro RIGHT_PARENTHESIS;
 
-sentenciaAsignacion ::= ID ASSIGN expresion;
+sentenciaAsignacion ::= referencia ASSIGN expresion;
+
+referencia ::= ID | ID LEFT_BRACKET expresion RIGHT_BRACKET;
 
 parametro ::= STRING 
 				| expresion 
 				| ;
 				
-expresion::= ID 
+expresion::= referencia 
 				| NUMBER 
 				| TRUE 
 				| FALSE 
