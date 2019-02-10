@@ -116,13 +116,20 @@ non terminal Axiom		axiom;
 non terminal            sentencias;
 non terminal            sentencia;
 non terminal            sentenciaEscribir;
+non terminal            sentenciaAsignacion;
+
 non terminal            parametro;
 non terminal			expresion;
+non terminal			operador;
 
 
 // Declaración de relaciones de precedencia
-precedence left     PLUS;
-precedence left RIGHT_BRACKET, LEFT_BRACKET, RIGHT_PARENTHESIS, LEFT_PARENTHESIS;
+precedence left AND;
+precedence left LESS;
+precedence left PLUS;
+precedence left ASTERISK;
+precedence left LEFT_BRACKET, RIGHT_BRACKET;
+precedence left LEFT_PARENTHESIS, RIGHT_PARENTHESIS;
 // ...
 
 // Declaración de reglas de producción
@@ -153,13 +160,25 @@ axiom ::= PROGRAM ID COLON BEGIN sentencias END DOT;
 
 sentencias ::= sentencia SEMICOLON sentencias 
 				| ;
-sentencia ::= sentenciaEscribir;
+sentencia ::= sentenciaEscribir
+				| sentenciaAsignacion;
+
 sentenciaEscribir ::= WRITE LEFT_PARENTHESIS parametro RIGHT_PARENTHESIS;
+
+sentenciaAsignacion ::= ID ASSIGN expresion;
 
 parametro ::= STRING 
 				| expresion 
 				| ;
+				
+expresion::= ID 
+				| NUMBER 
+				| TRUE 
+				| FALSE 
+				| expresion operador expresion 
+				| LEFT_PARENTHESIS expresion RIGHT_PARENTHESIS;
 
-expresion ::= expresion PLUS expresion 
-				| LEFT_PARENTHESIS expresion RIGHT_PARENTHESIS
-				| NUMBER;
+operador::= PLUS 
+				| ASTERISK 
+				| AND
+				| LESS;

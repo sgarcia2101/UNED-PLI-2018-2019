@@ -49,7 +49,7 @@ ESPACIO_BLANCO=[ \t\r\n\f]
 
 FIN_DE_LINEA = \r\n
 COMENTARIO   = #.*{FIN_DE_LINEA}
-NUMERO       = [0-9]
+NUMERO       = (0 | [1-9][0-9]*)
 CADENA       = \".*\"
 CARACTER     = [A-Za-z]
 GUION_BAJO   = _
