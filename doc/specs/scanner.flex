@@ -9,6 +9,8 @@ import es.uned.lsi.compiler.lexical.LexicalErrorManager;
 // incluir aqui, si es necesario otras importaciones
 
 %%
+
+%unicode
  
 %public
 %class Scanner
@@ -53,7 +55,7 @@ NUMERO       = (0 | [1-9][0-9]*)
 CADENA       = \".*\"
 CARACTER     = [A-Za-z]
 GUION_BAJO   = _
-IDENTIFICADOR= {GUION_BAJO}?{CARACTER}({CARACTER}|{NUMERO})*
+IDENTIFICADOR= {GUION_BAJO}?({CARACTER}|{GUION_BAJO}|{NUMERO})*
 
 
 %%

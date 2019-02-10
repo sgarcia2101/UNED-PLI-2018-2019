@@ -132,6 +132,7 @@ non terminal            declaracionesSubprograma;
 non terminal            declaracionSubprograma;
 non terminal            declaracionFuncion;
 non terminal			declaracionProcedimiento;
+non terminal			listaParametrosFuncionAux;
 non terminal            listaParametrosFuncion;
 non terminal            listaParametrosPasoPorvalor;
 non terminal            listaParametrosPasoPorReferencia;
@@ -232,9 +233,12 @@ declaracionesSubprograma   ::= declaracionSubprograma
 declaracionSubprograma ::= declaracionFuncion 
 				| declaracionProcedimiento;
                             
-declaracionFuncion ::= FUNCTION ID LEFT_PARENTHESIS listaParametrosFuncion RIGHT_PARENTHESIS COLON tiposPrimitivos COLON declaraciones BEGIN sentencias sentenciaReturn END SEMICOLON;
+declaracionFuncion ::= FUNCTION ID LEFT_PARENTHESIS listaParametrosFuncionAux RIGHT_PARENTHESIS COLON tiposPrimitivos COLON declaraciones BEGIN sentencias sentenciaReturn END SEMICOLON;
 
-declaracionProcedimiento ::= PROCEDURE ID LEFT_PARENTHESIS listaParametrosFuncion RIGHT_PARENTHESIS COLON declaraciones BEGIN sentencias END SEMICOLON;
+declaracionProcedimiento ::= PROCEDURE ID LEFT_PARENTHESIS listaParametrosFuncionAux RIGHT_PARENTHESIS COLON declaraciones BEGIN sentencias END SEMICOLON;
+
+listaParametrosFuncionAux ::= listaParametrosFuncion SEMICOLON listaParametrosFuncionAux 
+				| listaParametrosFuncion;
 
 listaParametrosFuncion ::= listaParametrosPasoPorReferencia | listaParametrosPasoPorvalor;
 
@@ -243,7 +247,7 @@ listaParametrosPasoPorReferencia ::= VAR listaParametrosPasoPorvalor;
 listaParametrosPasoPorvalor ::=  parametrosFuncion listaParametrosPasoPorvalor 
 				| parametrosFuncion;
 				
-parametrosFuncion ::= listaParametros COLON tiposPrimitivos;
+parametrosFuncion ::= listaParametros COLON tipos;
 
 listaParametros ::= expresion COMMA listaParametros | expresion | ;
 
