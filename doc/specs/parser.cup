@@ -131,7 +131,10 @@ non terminal            declaracionSubprogramas;
 non terminal            declaracionesSubprograma;
 non terminal            declaracionSubprograma;
 non terminal            declaracionFuncion;
+non terminal			declaracionProcedimiento;
 non terminal            listaParametrosFuncion;
+non terminal            listaParametrosPasoPorvalor;
+non terminal            listaParametrosPasoPorReferencia;
 non terminal            parametrosFuncion;
 non terminal            listaParametros;
 
@@ -151,12 +154,14 @@ non terminal            tiposPrimitivos;
 non terminal            parametro;
 non terminal			expresion;
 non terminal			operador;
+non terminal            valorPrimitivo;
 
 
 
 // Declaración de relaciones de precedencia
 precedence left AND;
 precedence left LESS;
+precedence left EQUAL;
 precedence left PLUS;
 precedence left ASTERISK;
 precedence left LEFT_BRACKET, RIGHT_BRACKET;
@@ -196,7 +201,7 @@ declaracionConstantes ::= CONSTANTS expresionesConstante
 				| ;
 expresionesConstante::= expresionConstante expresionesConstante 
 				| expresionConstante;
-expresionConstante::= ID ASSIGN NUMBER SEMICOLON;
+expresionConstante::= ID ASSIGN valorPrimitivo SEMICOLON;
 
 // declaraciones de variables
 declaracionVariables ::= VARIABLES expresionesVariable 
@@ -224,14 +229,23 @@ declaracionSubprogramas ::= SUBPROGRAM declaracionesSubprograma
 declaracionesSubprograma   ::= declaracionSubprograma 
 				| declaracionesSubprograma declaracionSubprograma;
 
-declaracionSubprograma ::= declaracionFuncion;
+declaracionSubprograma ::= declaracionFuncion 
+				| declaracionProcedimiento;
                             
 declaracionFuncion ::= FUNCTION ID LEFT_PARENTHESIS listaParametrosFuncion RIGHT_PARENTHESIS COLON tiposPrimitivos COLON declaraciones BEGIN sentencias sentenciaReturn END SEMICOLON;
 
-listaParametrosFuncion ::= parametrosFuncion listaParametrosFuncion | parametrosFuncion;
+declaracionProcedimiento ::= PROCEDURE ID LEFT_PARENTHESIS listaParametrosFuncion RIGHT_PARENTHESIS COLON declaraciones BEGIN sentencias END SEMICOLON;
+
+listaParametrosFuncion ::= listaParametrosPasoPorReferencia | listaParametrosPasoPorvalor;
+
+listaParametrosPasoPorReferencia ::= VAR listaParametrosPasoPorvalor;
+				
+listaParametrosPasoPorvalor ::=  parametrosFuncion listaParametrosPasoPorvalor 
+				| parametrosFuncion;
+				
 parametrosFuncion ::= listaParametros COLON tiposPrimitivos;
 
-listaParametros ::= ID COMMA listaParametros | ID;
+listaParametros ::= expresion COMMA listaParametros | expresion | ;
 
 sentenciaReturn ::= RETURN ID SEMICOLON;
 
@@ -244,6 +258,7 @@ sentencia ::= sentenciaEscribir
 				| sentenciaAsignacion
 				| bloqueIf
 				| bloqueFor
+				| llamadaFuncion
 				| ;
 
 sentenciaEscribir ::= WRITE LEFT_PARENTHESIS parametro RIGHT_PARENTHESIS;
@@ -257,23 +272,24 @@ parametro ::= STRING
 				| ;
 				
 expresion::= referencia 
-				| NUMBER 
-				| TRUE 
-				| FALSE 
+				| valorPrimitivo 
 				| expresion operador expresion 
 				| LEFT_PARENTHESIS expresion RIGHT_PARENTHESIS
 				| llamadaFuncion;
+
+valorPrimitivo ::= NUMBER | TRUE | FALSE;
 				
 llamadaFuncion ::= ID LEFT_PARENTHESIS listaParametros RIGHT_PARENTHESIS;
 
 operador::= PLUS 
 				| ASTERISK 
 				| AND
-				| LESS;
+				| LESS
+				| EQUAL;
 
 // BLOQUE IF
-bloqueIf ::= IF expresion THEN COLON sentencias END IF SEMICOLON
-				| IF expresion THEN COLON sentencias ELSE COLON sentencias END IF SEMICOLON;
+bloqueIf ::= IF expresion THEN COLON sentencias END IF
+				| IF expresion THEN COLON sentencias ELSE COLON sentencias END IF;
 				
 // BLOQUE FOR
-bloqueFor ::= FOR ID IN NUMBER RANGE NUMBER COLON sentencias END FOR SEMICOLON;
+bloqueFor ::= FOR ID IN expresion RANGE expresion COLON sentencias END FOR;

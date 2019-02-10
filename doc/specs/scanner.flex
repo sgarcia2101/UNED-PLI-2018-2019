@@ -61,6 +61,7 @@ IDENTIFICADOR= {GUION_BAJO}?{CARACTER}({CARACTER}|{NUMERO})*
 <YYINITIAL> 
 {
 
+	{FIN_DE_LINEA}		{}
 	{COMENTARIO}		{}
 	{NUMERO}			{	return createToken(sym.NUMBER);			}
 	{CADENA}			{	return createToken(sym.STRING);			}
