@@ -127,7 +127,6 @@ non terminal            declaracionTipos;
 non terminal            expresionesTipo;
 non terminal            expresionTipo;
 
-
 non terminal            declaracionSubprogramas;
 non terminal            declaracionesSubprograma;
 non terminal            declaracionSubprograma;
@@ -149,6 +148,8 @@ non terminal            tiposPrimitivos;
 non terminal            parametro;
 non terminal			expresion;
 non terminal			operador;
+
+non terminal            bloqueIf;
 
 
 // Declaración de relaciones de precedencia
@@ -236,9 +237,11 @@ sentenciaReturn ::= RETURN ID SEMICOLON;
 // SENTENCIAS BODY
 
 sentencias ::= sentencia SEMICOLON sentencias 
-				| ;
+				| sentencia;
 sentencia ::= sentenciaEscribir
-				| sentenciaAsignacion;
+				| sentenciaAsignacion
+				| bloqueIf
+				| ;
 
 sentenciaEscribir ::= WRITE LEFT_PARENTHESIS parametro RIGHT_PARENTHESIS;
 
@@ -264,3 +267,7 @@ operador::= PLUS
 				| ASTERISK 
 				| AND
 				| LESS;
+
+// BLOQUE IF
+bloqueIf ::= IF expresion THEN COLON sentencias END IF SEMICOLON
+				| IF expresion THEN COLON sentencias ELSE COLON sentencias END IF SEMICOLON;
