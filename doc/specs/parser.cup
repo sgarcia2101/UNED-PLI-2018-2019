@@ -143,13 +143,15 @@ non terminal            sentenciaReturn;
 non terminal			llamadaFuncion;
 non terminal            referencia;
 
+non terminal            bloqueIf;
+non terminal            bloqueFor;
+
 non terminal            tipos;
 non terminal            tiposPrimitivos;
 non terminal            parametro;
 non terminal			expresion;
 non terminal			operador;
 
-non terminal            bloqueIf;
 
 
 // Declaración de relaciones de precedencia
@@ -241,6 +243,7 @@ sentencias ::= sentencia SEMICOLON sentencias
 sentencia ::= sentenciaEscribir
 				| sentenciaAsignacion
 				| bloqueIf
+				| bloqueFor
 				| ;
 
 sentenciaEscribir ::= WRITE LEFT_PARENTHESIS parametro RIGHT_PARENTHESIS;
@@ -271,3 +274,6 @@ operador::= PLUS
 // BLOQUE IF
 bloqueIf ::= IF expresion THEN COLON sentencias END IF SEMICOLON
 				| IF expresion THEN COLON sentencias ELSE COLON sentencias END IF SEMICOLON;
+				
+// BLOQUE FOR
+bloqueFor ::= FOR ID IN NUMBER RANGE NUMBER COLON sentencias END FOR SEMICOLON;
