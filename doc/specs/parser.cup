@@ -1,6 +1,6 @@
 package compiler.syntax;
 
-// Declaración de importaciones 
+// Declaraciï¿½n de importaciones 
 //(No modificar las proporcionadas. Se pueden agregar mas)
 
 import java_cup.runtime.Symbol;
@@ -23,7 +23,7 @@ import compiler.semantic.type.*;
 import compiler.intermediate.*;
 import compiler.code.*;
 
-// Declaración del código de usuario
+// Declaraciï¿½n del cï¿½digo de usuario
 
 action code {:
 	
@@ -50,7 +50,7 @@ parser code {:
 	}
 :}
 
-// Declaración de terminales (Ejemplo)
+// Declaraciï¿½n de terminales (Ejemplo)
 
 terminal Token COMMENT;
 terminal Token NUMBER;
@@ -107,7 +107,7 @@ terminal Token VECTOR_ACCESS;
 // ...
 
 
-// Declaración de no terminales
+// Declaraciï¿½n de no terminales
 // no modificar los propuestos
 
 non terminal  			program;
@@ -152,6 +152,7 @@ non terminal            bloqueFor;
 
 non terminal            tipos;
 non terminal            tiposPrimitivos;
+non terminal            tipoVector;
 non terminal            parametro;
 non terminal			expresion;
 non terminal			operador;
@@ -159,7 +160,7 @@ non terminal            valorPrimitivo;
 
 
 
-// Declaración de relaciones de precedencia
+// Declaraciï¿½n de relaciones de precedencia
 precedence left AND;
 precedence left LESS;
 precedence left EQUAL;
@@ -169,7 +170,7 @@ precedence left LEFT_BRACKET, RIGHT_BRACKET;
 precedence left LEFT_PARENTHESIS, RIGHT_PARENTHESIS;
 // ...
 
-// Declaración de reglas de producción
+// Declaraciï¿½n de reglas de producciï¿½n
 
 
 start with program;
@@ -180,14 +181,14 @@ program ::=
    :}
   axiom:ax
   {: 
-  		// No modificar esta estructura, aunque se pueden añadir más acciones semánticas
+  		// No modificar esta estructura, aunque se pueden aï¿½adir mï¿½s acciones semï¿½nticas
   		// Para la entrega de febrero pueden comentarse las dos sentencias siguientes:
   		//List intermediateCode = ax.getIntermediateCode ();
   		//finalCodeFactory.create (intermediateCode);
   		// En caso de no comentarse las sentencias anteriores puede generar una excepcion
   		// en las llamadas a cupTest en la entrega de Febrero. Esto es debido a que 
-  		// aún no se tendrá implementada la generación de código intermedio ni final.
-  		// Para la entrega de Junio deberán descomentarse y usarse.
+  		// aï¿½n no se tendrï¿½ implementada la generaciï¿½n de cï¿½digo intermedio ni final.
+  		// Para la entrega de Junio deberï¿½n descomentarse y usarse.
   		
   		syntaxErrorManager.syntaxInfo ("Parsing process ended.");
    :};
@@ -217,12 +218,15 @@ declaracionTipos ::= TYPES expresionesTipo
 				| ;
 expresionesTipo::= expresionesTipo expresionTipo 
 				| expresionTipo;
-expresionTipo::= ID ASSIGN VECTOR LEFT_BRACKET NUMBER RANGE NUMBER RIGHT_BRACKET OF tiposPrimitivos SEMICOLON;
+expresionTipo::= ID ASSIGN tiposPrimitivos SEMICOLON
+				| ID ASSIGN VECTOR LEFT_BRACKET tipoVector RANGE tipoVector RIGHT_BRACKET OF tiposPrimitivos SEMICOLON;
 
 tipos ::= tiposPrimitivos 
 				| ID;
 tiposPrimitivos ::= INTEGER 
 				| BOOLEAN;
+				
+tipoVector ::= ID | NUMBER;
 
 // SUBPROGRAMAS
 declaracionSubprogramas ::= SUBPROGRAM declaracionesSubprograma 
@@ -233,12 +237,13 @@ declaracionesSubprograma   ::= declaracionSubprograma
 declaracionSubprograma ::= declaracionFuncion 
 				| declaracionProcedimiento;
                             
-declaracionFuncion ::= FUNCTION ID LEFT_PARENTHESIS listaParametrosFuncionAux RIGHT_PARENTHESIS COLON tiposPrimitivos COLON declaraciones BEGIN sentencias sentenciaReturn END SEMICOLON;
+declaracionFuncion ::= FUNCTION ID LEFT_PARENTHESIS listaParametrosFuncionAux RIGHT_PARENTHESIS COLON tiposPrimitivos COLON declaraciones BEGIN sentencias END SEMICOLON;
 
 declaracionProcedimiento ::= PROCEDURE ID LEFT_PARENTHESIS listaParametrosFuncionAux RIGHT_PARENTHESIS COLON declaraciones BEGIN sentencias END SEMICOLON;
 
 listaParametrosFuncionAux ::= listaParametrosFuncion SEMICOLON listaParametrosFuncionAux 
-				| listaParametrosFuncion;
+				| listaParametrosFuncion
+				| ;
 
 listaParametrosFuncion ::= listaParametrosPasoPorReferencia | listaParametrosPasoPorvalor;
 
@@ -251,7 +256,7 @@ parametrosFuncion ::= listaParametros COLON tipos;
 
 listaParametros ::= expresion COMMA listaParametros | expresion | ;
 
-sentenciaReturn ::= RETURN ID SEMICOLON;
+sentenciaReturn ::= RETURN expresion;
 
 
 // SENTENCIAS BODY
@@ -260,6 +265,7 @@ sentencias ::= sentencia SEMICOLON sentencias
 				| sentencia;
 sentencia ::= sentenciaEscribir
 				| sentenciaAsignacion
+				| sentenciaReturn
 				| bloqueIf
 				| bloqueFor
 				| llamadaFuncion
@@ -279,7 +285,8 @@ expresion::= referencia
 				| valorPrimitivo 
 				| expresion operador expresion 
 				| LEFT_PARENTHESIS expresion RIGHT_PARENTHESIS
-				| llamadaFuncion;
+				| llamadaFuncion
+				| NOT expresion;
 
 valorPrimitivo ::= NUMBER | TRUE | FALSE;
 				

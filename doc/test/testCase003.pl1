@@ -1,0 +1,100 @@
+# Test programa completo y sintacticamente correcto
+programa completo:
+	constantes
+		cte1 = 1;
+		cte2 = 52;
+		cte3 = 435;
+		cte4 = cierto;
+		cte5 = falso;
+	tipos		
+		TipoVectorEnteros = vector [1..89564] de entero;
+		TipoVectorBooleanos = vector [1..853] de booleano;
+	variables		
+		a : entero;	
+		b:entero;
+		qwertyuiop : entero;
+		_x, y5y: entero; 
+		x, w : entero;
+		v1, v2 : booleano;
+		e, r, n, _6 : entero;
+		l : booleano;
+		vector_enteros,vector_enteros2,vector_enteros3 : TipoVectorEnteros;
+		vector_booleanos: TipoVectorBooleanos;
+	subprogramas
+			procedimiento procedimiento1 (a,b,c,d,e: entero;
+										  var vector_enteros,vector_enteros2,vector_enteros3: TipoVectorEnteros;
+										  var vector_booleanos: TipoVectorBooleanos;
+										  v1, v2 : booleano):
+				constantes
+					a = 1;
+					b = 52;
+					h=435;
+					pepe = cierto;
+					juan = falso;
+				tipos		
+					vector_enteros3 = vector [1..3] de entero;
+					vector_booleanos3 = vector [1..853] de booleano;
+				variables		
+					z : entero;		
+					mpb : entero;
+					lt : booleano;
+					x, y_5y: entero; 
+					x, _0 : entero;
+					v1, v2 : booleano;
+					e, r, n, t6 : entero;
+					l : booleano;
+					v : vector_booleanos3;
+				subprogramas
+					funcion funcion_interna(var a:TipoVectorBooleanos): entero:
+					variables		
+						g : entero;		
+						h : booleano;
+						i : entero;
+					comienzo
+						para i en funcion_entera_desconocida(g,25,h) .. i:
+							escribir(i);
+							qwertyuiop=z+mpb;
+							escribir(qwertyuiop);
+							escribir("cuñao");
+							devolver 1;
+							si lt entonces:
+								mpb=CIERTO Y NO FALSO;
+								w=((((5+4)*9)));
+								l=funcion_no_definida((((4<46))),f,g,h,funcion1());
+								devolver l;
+							sino:
+								vector_booleanos3[2]=((no (cierto y no 4==4 y cierto)y no cierto)y 6*9<4)==falso;
+								para i en a .. (((53*3))):
+									escribir(i);
+									l=funcion_no_definida(((((funcion1())))+1)<6);
+								fin para;
+								devolver 1;
+							fin si;
+						fin para;
+						devolver 0;
+					fin;
+			comienzo
+					mpb=z+mpb;
+					escribir(mbp);
+			fin;
+			funcion funcion1 (): booleano:
+			comienzo
+				devolver (((4+2)*5)<4);
+			fin;	
+	comienzo
+		procedimiento1();
+		si 5+5<2==falso entonces:
+			mpb=45;
+			booleano_2=((((5<4)y no v2)));
+			l=funcion_no_definida(((((a+b)*484+4*5*7*1+5+7+9*4<46))),f,g,h,(funcion1()));
+		sino:
+			TipoVectorEnteros[2]=((4+534+1)*5);
+			TipoVectorEnteros[3]=((0));
+			TipoVectorEnteros[3]=((0+0));
+			si 1==1 entonces:
+				f=CIERTO;
+			sino:
+				f=CIERTO;
+			fin si;
+		fin si;
+fin.

@@ -1,0 +1,142 @@
+# Test programa completo y sintácticamente correcto ñññ
+programa completo:
+	constantes
+		cte1 = 1;
+		cte2 = 52;
+		cte3 = 435;
+		cte4 = cierto;
+		cte5 = falso;
+	tipos		
+		TipoVectorEnteros = vector [1..89564] de entero;
+		TipoVectorBooleanos = vector [1..853] de booleano;
+	variables		
+		a : entero;	
+		b:entero;
+		qwertyuiop : entero;
+		_x, y5y: entero; 
+		x, w : entero;
+		v1, v2 : booleano;
+		e, r, n, _6 : entero;
+		l : booleano;
+		vectorenteros,vectorenteros2,vectorenteros3 : TipoVectorEnteros;
+		vectorbooleanos: TipoVectorBooleanos;
+	subprogramas
+			procedimiento procedimiento0 ():
+			comienzo
+			fin;
+			funcion funcion0 (): entero:
+			comienzo
+			devolver x;
+			fin;
+			procedimiento procedimiento1 (a,b,c,d,e: entero; 
+
+										var vectorenteros,vectorenteros2,vectorenteros3: TipoVectorEnteros;
+										  var vectorbooleanos: TipoVectorBooleanos;
+										  v1, v2 : booleano):
+				constantes
+					a = 1;
+					b = 52;
+					h=435;
+					pepe = cierto;
+					juan = falso;
+				tipos		
+					vectorenteros3 = vector [1..3] de entero;
+					vectorbooleanos3 = vector [1..853] de booleano;
+				variables		
+					z : entero;		
+					mpb : entero;
+					lt : booleano;
+					x, y5y: entero; 
+					x, _0 : entero;
+					v1, v2 : booleano;
+					e, r, n, t6 : entero;
+					l : booleano;
+					v : vectorbooleanos3;
+				subprogramas
+					funcion funcioninterna(var a:TipoVectorBooleanos): entero:
+					variables		
+						g : entero;		
+						h : booleano;
+						i : entero;
+					comienzo
+						para i en funcionenteradesconocida(g,25,h) .. i:
+						prosichar();
+					#	prosichar("caena");
+						prosichar(args);
+					devolver 3;
+							 escribir();
+							 escribir(i);
+							
+							si lt entonces:
+			w=5*(4+9);
+					w=(5*4)+9;
+					w=(5+4)*9;
+								w=((((5+4)*9)));
+								l=funcionnodefinida((((4<46))),f,g,h,funcion1());
+						l=funcionnodefinida();
+								devolver l;
+							sino:
+								vectorbooleanos3[2]=((no (cierto y no 4==4 y cierto)y no cierto)y 6*9<4)==falso;
+								para i en a .. (((53*3))):
+									escribir(i);
+									l=funcionnodefinida(((((funcion1())))+1)<6);
+								fin para;
+								devolver 1;
+							fin si;
+						fin para;
+						devolver 0;
+					fin;
+			comienzo
+					mpb=z+mpb;
+					escribir(mbp);
+			fin;
+			funcion funcion1 (): booleano:
+			comienzo
+				devolver (((4+2)*5)<4);
+			fin;	
+	comienzo
+		procedimiento1();
+		si 5+5<2==falso entonces:
+			mpb=45;
+			booleano2=((((5<4)y no v2)));
+			l=funcionnodefinida(((((a+b)*484+4*5*7*1+5+7+9*4<46))),f,g,h,(funcion1()));
+		sino:
+			TipoVectorEnteros[2]=((4+534+1)*5);
+			TipoVectorEnteros[3]=((0));
+			TipoVectorEnteros[3]=((0+0));
+			si 1==1 entonces:
+				f=CIERTO;
+			sino:
+				f=CIERTO;
+			fin si;
+		fin si;
+
+#AÑADIDOS DEL ENUNCIADO DE LA PRACTICA
+i = 3 + 7;
+v[i] = 10;
+igual = 3==4;
+a = suma(2,2); #llamada a función
+si (a < b) entonces:
+a = b;
+sino:
+ a = a + b;
+b = a;
+fin si;
+si (a<b) entonces:
+a =b;
+si a<c entonces:
+a =c;
+sino:
+c =a;
+fin si;
+sino:
+b=a;
+fin si;
+
+b=5;
+para a en 1 .. b:
+escribir(a);
+fin para;
+
+
+fin.

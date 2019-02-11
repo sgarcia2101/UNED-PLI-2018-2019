@@ -1,0 +1,94 @@
+# Este es un comentario correcto
+# Este comentario
+# contiene varias lneas
+
+programa nombrePrograma:
+	constantes #Comentario por aqu
+		TAMANO = 10;
+		MESES = 12;
+		ANYO = 2007;
+		ABIERTO = cierto; # Comentario por all
+	tipos
+		TipoVectorEnteros = vector [1..3] de entero;
+		TipoVectorBooleanos = vector [1..3] de booleano;
+		#Declaracin tipos globales
+	variables
+		x, z : entero;
+		abierto : booleano;
+		v1, v2 : TipoVector;
+		v : TipoVectorEnteros;
+		b : TipoVectorBooleanos;
+		#Declaracin variables globales
+	subprogramas
+		procedimiento ejemplo (a : entero):
+			variables b,c: entero;
+		comienzo
+			c = a + 2;
+			b = a + c;
+		fin;
+		#Declaracin subprogramas
+		
+		funcion ejFuncion (a,b : entero): entero:
+			variables suma: entero;
+		comienzo
+			suma = a + b;
+			devolver suma;
+		fin;
+		
+		procedimiento ejemplo (var a : entero):
+		comienzo
+			a = a + 1;
+		fin;
+		
+		funcion ejFuncion (var a,b : entero): entero:
+			variables suma: entero;
+		comienzo
+			suma = a + b;
+			a = a + 2;
+			b = b * 2;
+			devolver suma;
+		fin;
+comienzo
+	v[1] = 3;
+	v[2] = 3 * v[1];
+	v[3] = v[3] + v[2];
+	b[1] = v[1] < 0;
+	b[2] = cierto;
+	b[3] = b[1] y b[2];
+	c= suma(a,b);
+	d= resta(10, v[2]);
+	a = funcion1();
+	
+	#Lista sentencias
+	
+	i = 3 + 7;
+	v[i] = 10;
+	igual = 3==4;
+	a = suma(2,2); #llamada a funcin
+	
+	si (a < b) entonces:
+		a = b;
+	sino:
+		a = a + b;
+		b = a;
+	fin si;
+	
+	si (a<b) entonces:
+		a =b;
+		si a<c entonces:
+			a =c;
+		sino:
+			c =a;
+		fin si;
+	sino:
+		b=a;
+	fin si;
+	
+	b=5;
+	para a en 1 .. b:
+		escribir(a);
+	fin para;
+	
+	procedimiento1();
+	escribeVector(vectorEnteros);
+fin.

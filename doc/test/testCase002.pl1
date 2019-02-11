@@ -1,0 +1,43 @@
+# programa con condicional
+programa siete:
+	constantes
+		a = 10;
+		b = 20;
+	
+comienzo
+  
+  PARA a EN 1 .. b :
+  
+	si (cierto) entonces:
+		escribir("b es mayor que a");
+		a = 10;
+	sino:
+		si (6+7<2) entonces:
+			escribir("a es mayor que b");
+			a = b;
+		sino:
+		
+		  PARA algo EN funcionArit(2,3,4) .. otrafA(4) :
+			escribir("a y b son iguales");
+			b = 20;
+		  FIN PARA;
+		  	
+		fin si;
+	fin si;
+	
+	si a==b entonces:
+		escribir(3*5+54);
+		a = (5+5*7<2);
+	sino:
+		si (5<2+7) entonces:
+			#escribir(funcionAritmetica(2));
+			a = b;
+		sino:
+			escribir();
+			b = 20;
+		fin si;
+	fin si;
+	
+  FIN PARA ;	
+
+fin.

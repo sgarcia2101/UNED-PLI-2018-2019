@@ -11,6 +11,7 @@ import es.uned.lsi.compiler.lexical.LexicalErrorManager;
 %%
 
 %unicode
+%ignorecase
  
 %public
 %class Scanner

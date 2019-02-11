@@ -1,0 +1,147 @@
+programa uno:
+	
+	CONSTANTES
+		a = 10;
+		b = 20; 
+     	ABIERTO = cierto; 
+     	MAX = 5;
+		
+     
+	TIPOS
+		_C = BOOLEANO;
+		a = ENTERO;
+		bc = ENTERO;
+		
+		tvector = vector [1..2] de entero;
+    
+    	Mivector = vector [1..MAX] de entero;   
+   
+     VARIABLES
+       		i : entero ;
+       		x, z : booleano ;
+       		v1: Mivector ; 
+       		conjuncion : booleano;
+       	
+     SUBPROGRAMAS
+     	procedimiento PRO1 (var param11, param12 : entero; 
+                 			VAR param21, param22 : booleano ):
+     		CONSTANTES
+     			aa = 111;
+     		TIPOS
+     			bb = ENTERO;
+     			Svector = vector [1..2] de entero;
+     		VARIABLES
+     			vv : booleano;
+     				
+     	comienzo
+     		a=funcionRR(2,4,6);
+     	fin; 
+     	 
+     	procedimiento PRO1 (param11, param12 : entero; 
+                 			 param21, param22 : booleano ):
+     		CONSTANTES
+     			aa = 111;
+     		TIPOS
+     			bb = ENTERO;
+     			TipoVector = vector [1..2] de entero;
+     		VARIABLES
+     			vv : booleano;
+     			v1, v2 : TipoVector;
+     			v : TipoVectorEnteros; 
+    			b : TipoVectorBooleanos;
+     		
+     		SUBPROGRAMAS	# Subprograma anidado
+     		
+     		 procedimiento procedimiento1 (a,b,c,d,e: entero;
+			 var vectorenteros,vectorenteros2,vectorenteros3: TipoVectorEnteros;
+			 var vectorbooleanos: TipoVectorBooleanos;
+						v1, v2 : booleano):
+			 comienzo
+			 	a= (1+2)+3*4;
+			 fin;
+			 
+			 funcion sumar ( as: booleano;  ss:entero): entero:
+				variables suma: entero;
+			 comienzo
+				     a = v[3];
+				
+				DEVOLVER 1;
+			 fin;
+				
+     	comienzo
+     		 booly = (b < c); 
+			 booly = cierto Y (b < c); 
+ 		     boola = NO (a < b) y (4 < 5);
+			 otra = resultado < 2 ;
+		     a = v[3];
+     	
+     	fin;  
+     	
+     	
+     	funcion sumar ( as: booleano;  ss:entero): entero:
+			variables suma: entero;
+		comienzo
+			
+			DEVOLVER suma;
+		fin;
+		
+		procedimiento PRO1 ():
+     		
+     	comienzo
+     		v[1] = 3; 
+     	fin ; 
+		
+     	procedimiento PRO1 (VAR param11, param12 : entero; 
+                 			VAR param21, param22 : booleano ):
+     		CONSTANTES
+     			aa = 111;
+     		TIPOS
+     			bb = ENTERO;
+     			Svector = vector [1..2] de entero;
+     		VARIABLES
+     			vv : booleano;
+     				
+     	comienzo
+     		v[1] = 3; 
+     	fin;
+     	
+     	procedimiento procedimiento1 (a,b,c,d,e: entero;
+			 var vectorenteros,vectorenteros2,vectorenteros3: TipoVectorEnteros;
+			 var vectorbooleanos: TipoVectorBooleanos;
+						v1, v2 : booleano):
+		comienzo
+				#DEVOLVER 1;	
+			 a = v[v[3]]; 
+		fin;
+		
+comienzo
+	 	
+	 a = 5 + 4 * 4 ;
+	 fvar = fun(1,2) < fun();
+	 i = 3 + 7 * 9; 
+	 v[i] = 10; 
+	 igual = 3==4; 
+	 a = suma(2,2); #llamada a función 
+	 c= suma(a,b);  
+	 d= resta(10, v[2]); 
+	 a = funcion1(); 
+	 v[1]=3;
+	 v[a]= (3*6);
+     v[2] = 3 * v[1]; 
+     v[3] = v[3] + v[2]; 
+     b[1] = v[1] * b[0] + v[2] ; 
+     b[1] = v[1] < 0; 
+	 b[2] = cierto;
+	 vector1 = vector2;	# Esto deberia dar error ?
+	 a = v[v[3]];
+	 b[3] = b[1] y b[2]; 
+	 aaa = sumar(3,4,59); 
+	 aa = sumar(3,3+4,5,otrafuncion(5)); # llamada a funcion
+	 fbool = n == a;
+	 otramas =( no falso );
+	 conjuncion = cierto y falso;
+	 # conjuncion = cierto == falso; FALLA
+	 resultadoLogico = CIERTO y (a < b);
+	 otro = (a<c) Y conjuncion ;
+	 otroo = conjuncion y (a<5);
+fin.
